@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="task_sharing_portal" name="task Sharing View in Portal">
+            <t t-call="test_project.task_sharing"/>
+    </template>
+
+    <template id="task_sharing" name="task Sharing View">
+        <iframe class="flex-grow-1" frameborder="0" t-attf-src="www.jira.com"/>
+    </template>
+
+    <template id="portal_my_task" inherit_id="project.portal_my_task" name="Portal: My Task with Timesheets">
+        <xpath expr="//t[@t-set='card_body']" position="inside">
+            <a class="btn btn-secondary btn-block o_download_btn"
+               t-attf-href="/open/task/{{task.id}}"
+               target="_blank"
+               title="View">
+                <i class="fa fa-eye"/>
+                view
+            </a>
+        </xpath>
+    </template>
+
+
+</odoo>
