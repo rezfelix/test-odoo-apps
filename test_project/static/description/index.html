@@ -502,29 +502,34 @@
 
 
                   <div class="container">
-                    <ul class="nav nav-tabs">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#tab1" data-bs-toggle="tab">Tab 1</a>
+                    <ul class="nav nav-pills mb-3" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="#tab1" data-bs-toggle="pill" role="tab" aria-selected="true">Tab 1</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#tab2" data-bs-toggle="tab">Tab 2</a>
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="#tab2" data-bs-toggle="pill" role="tab" aria-selected="false">Tab 2</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#tab3" data-bs-toggle="tab">Tab 3</a>
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="#tab3" data-bs-toggle="pill" role="tab" aria-selected="false">Tab 3</a>
                       </li>
                     </ul>
+                  
                     <div class="tab-content">
-                      <div class="tab-pane fade show active" id="tab1">
-                        <p>Content for Tab 1 goes here.</p>
+                      <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                        <h3>Tab 1 content</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                       </div>
-                      <div class="tab-pane fade" id="tab2">
-                        <p>Content for Tab 2 goes here.</p>
+                      <div class="tab-pane fade" id="tab2" role="tabpanel">
+                        <h3>Tab 2 content</h3>
+                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                       </div>
-                      <div class="tab-pane fade" id="tab3">
-                        <p>Content for Tab 3 goes here.</p>
+                      <div class="tab-pane fade" id="tab3" role="tabpanel">
+                        <h3>Tab 3 content</h3>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                       </div>
                     </div>
                   </div>
+                  
                   
                   
 
