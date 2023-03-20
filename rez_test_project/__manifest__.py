@@ -3,7 +3,7 @@
 {
     'name': "Test Project",
     'summary': "Project from portal",
-    'image': 'rez_test_project/static/description/image.png',
+    'images': 'static/description/image.png',
     'description': """ """,
     'author': "Some Author",
     'website': "http://www.bloopark.de",
