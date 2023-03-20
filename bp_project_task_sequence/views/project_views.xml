@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="edit_project" model="ir.ui.view">
+        <field name="name">project.project.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='settings']" position="inside">
+                <group name="sequence_settings" string="Sequence Configuration">
+                    <group>
+                        <field name="project_sequence_id"
+                               domain="[('res_model','=','project.project'),('res_id','=',id)]"
+                               options='{"no_quick_create": True}'
+                               context="{
+                               'default_padding':5,
+                               'default_res_model': 'project.project',
+                               'default_res_id': id,
+                               }"
+                        />
+                        <field name="sub_task_hierarchy_sequence"/>
+
+                    </group>
+
+                    <group/>
+                    <button string="Reset tasks Sequence"
+                            class="col-2 oe_highlight"
+                            type="object"
+                            confirm="Are you sure to reset all (Parent/Childs) tasks sequence with the current sequence?"
+                            name="action_reset_tasks_sequence"/>
+
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

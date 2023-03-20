@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="certificate_template">
+        <t t-foreach="docs" t-as="o">
+            <div class="container">
+                <style>
+                    @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pinyon+Script|Rochester|Montserrat');
+                    @import url('https://fonts.googleapis.com/css2?family=Satisfy');
+                    @import url('https://fonts.googleapis.com/css2?family=Roboto');
+                    @font-face {
+                    font-family: 'Mont';
+                    src: url('/bp_employee_certificate/static/src/fonts/Mont-Regular.woff2') format('woff2'),
+                    url('/bp_employee_certificate/static/src/fonts/Mont-Regular.woff') format('woff');
+                    font-weight: normal;
+                    font-style: normal;
+                    }
+                    @font-face {
+                    font-family: 'Mont';
+                    src: url('/bp_employee_certificate/static/src/fonts/Mont-Bold.woff2') format('woff2'),
+                    url('/bp_employee_certificate/static/src/fonts/Mont-Bold.woff') format('woff');
+                    font-weight: bold;
+                    font-style: normal;
+                    }
+                    .mont {
+                    font-family: 'Mont';
+                    }
+                    .cursive {
+                    font-family: 'Pinyon Script', cursive;
+                    }
+                    body{
+                    font-family: Roboto;
+                    }
+                    .cert-subtitle
+                    {
+                    font-size:11px;
+                    line-height:16px;
+                    color:#47484A;
+                    }
+                    .outer-border {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: calc(100% - 172px);
+                    height: calc(100vh - 222px);
+                    padding: 56px 56px 40px;
+                    text-align: center;
+                    border: 2px solid #ffd32d;
+                    border-bottom: 56px solid #ffd32d!important;
+                    margin: 30px;
+                    background-image: url(/bp_employee_certificate/static/src/img/hexagon-top-left.png);
+                    background-repeat: no-repeat;
+                    }
+                    .outer-border:after {
+                    content: '';
+                    width: 196px;
+                    height: 182px;
+                    background-image: url(/bp_employee_certificate/static/src/img/hexagon-right-bottom.png);
+                    background-repeat: no-repeat;
+                    position: absolute;
+                    right: 36px;
+                    bottom: 100px;
+                    }
+
+                    .certification{
+                    font-size:50px;
+                    font-weight:bold;
+                    color: #18223c;
+                    }
+
+                    .certify {
+                    max-width: 350px;
+                    font-size: 11px;
+                    font-weight: 400;
+                    color: #47484A;
+                    line-height: 16px;
+                    margin: 0 auto;
+                    }
+                    .certify-date {
+                    font-weight: 400;
+                    font-size: 10px;
+                    line-height: 16px;
+                    color: #939496;
+                    margin: 8px 0;
+                    }
+                    .name{
+                    font-family: 'Satisfy', cursive;
+                    color#000000;
+                    font-weight: 400;
+                    font-size: 31px;
+                    line-height: 45px;
+                    margin: 50px 0 20px;
+                    }
+
+                    .fs-30{
+                    font-size:30px;
+                    }
+                    .fs-40{
+                    font-size:40px;
+                    }
+
+                    .fs-20{
+                    font-size:20px;
+                    }
+                    .date-dyx{
+                    margin
+                    }
+                    .signature {
+                    display: flex;
+                    }
+                    .signature div {
+                    border-top: 1px solid #18223C14;
+                    padding: 4px 40px;
+                    font-weight: 400;
+                    font-size: 11px;
+                    line-height: 16px;
+                    color:#47484A;
+                    margin: 53px 44px 0;
+                    position: relative;
+                    }
+
+                    .signature img {
+                    width: 150px;
+                    position: absolute;
+                    margin-top: -50px;
+                    margin-left: -75px;
+                    left: 50%;
+                    }
+                    .hr-sig{
+                    margin-left: -30px !important;
+                    }
+                    .barcode {
+                    background: #ffd42d;
+                    width: calc(100% - 84px);
+                    position: absolute;
+                    bottom: 37px;
+                    left:40px;
+                    display: flex;
+                    align-items: center;
+                    padding: 4px;
+                    justify-content: space-between;
+                    height: 56px;
+                    }
+                    .honeycomb {
+                    display: flex;
+                    flex-wrap: wrap;
+                    list-style: none;
+                    justify-content: center;
+                    align-items: center;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0;
+                    transform: translateY(34.375px);
+                    }
+                    .honeycomb-cell {
+                    flex: 0 1 120px;
+                    max-width: 130px;
+                    height: 61.5px;
+                    margin: 42.47619px 12.5px 45px;
+                    position: relative;
+                    padding: 0.5em;
+                    text-align: center;
+                    z-index: 1;
+                    }
+                    .duration {
+                    position: absolute;
+                    left: calc(50% + 31px);
+                    top: 64px;
+                    height: 20px;
+                    width: 36px;
+                    padding: 0 4px 4px;
+                    line-height: 13px;
+                    font-size: 12px;
+                    }
+                    .duration span {
+                    font-weight: bold;
+                    }
+                    .honeycomb-cell__title {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    hyphens: auto;
+                    word-break: break-word;
+                    text-transform: uppercase;
+                    color: #fff;
+                    font-weight: 700;
+                    font-size: 1.75em;
+                    transition: opacity 350ms;
+                    }
+                    .honeycomb-cell__title > small {
+                    font-weight: 300;
+                    margin-top: 0.25em;
+                    }
+                    .honeycomb-cell__image {
+                    object-fit: cover;
+                    object-position: center;
+                    }
+                    .honeycomb-cell::before, .honeycomb-cell::after {
+                    content: '';
+                    }
+                    .honeycomb-cell::before, .honeycomb-cell::after, .honeycomb-cell__image {
+                    top: -50%;
+                    left: 0;
+                    width: 100%;
+                    height: 200%;
+                    display: block;
+                    position: absolute;
+                    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                    z-index: -1;
+                    }
+                    .honeycomb-cell::before {
+                    background: #ffd52c;
+                    transform: scale(1.055);
+                    }
+                    .honeycomb-cell.duration::before {
+                    background: #ffd52c;
+                    }
+                    .honeycomb-cell.duration:after {
+                    background: transparent;
+                    }
+                    .honeycomb__placeholder {
+                    display: none;
+                    opacity: 0;
+                    width: 250px;
+                    margin: 0 12.5px;
+                    }
+                </style>
+                <div class="outer-border" style=" background-image: url(/bp_employee_certificate/static/src/img/hexagon-top-left.png);">
+                    <div class="inner-border">
+                        <h1 class="mont">
+                            Congratulations!
+                        </h1>
+                        <span>On Completing Your
+                            <span t-esc="o.concert_num2words(o.certificate_years)"/>
+                            <t t-if="o.certificate_years == 1">Year</t>
+                            <t t-else="">Years</t>
+                            at Work at
+                        </span>
+                        <span t-esc="o.company_id.name"/>
+
+                        <ul class="honeycomb" lang="es">
+                            <li class="honeycomb-cell">
+                                <img t-if="o.employee_id.image_1920"
+                                     t-att-src="image_data_uri(o.employee_id.image_1920)"
+                                     class="honeycomb-cell__image"
+                                     alt="Company Logo"/>
+
+                            </li>
+                            <li class="honeycomb-cell duration">
+                                <div>
+                                    <span t-esc="o.certificate_years"/>
+                                </div>
+
+                                <div>
+                                    <t t-if="o.certificate_years == 1">Year</t>
+                                    <t t-else="">Years</t>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <p class="name">
+                            <span t-esc="o.employee_id.name"/>
+                        </p>
+                        <p class="certify">
+                            Thank you for being part of our company’s success over the years.
+                            We greatly appreciate and value your hard work and loyalty.
+                        </p>
+
+
+                        <div class="certify-date">
+                            Is presented on
+                            <span t-field="o.date"/>
+                        </div>
+                        <div class="signature">
+                            <div>
+                                <img t-if="o.ceo_signature"
+                                     t-att-src="image_data_uri(o.ceo_signature)"
+                                     alt="CEO Signature"/>
+                                <span t-esc="o.ceo_employee_id.name"/>
+                                <span>, CEO</span>
+                            </div>
+                            <div>
+                                <img t-if="o.hr_signature"
+                                     t-att-src="image_data_uri(o.hr_signature)"
+                                     alt="HR Signature"/>
+                                <span t-esc="o.hr_employee_id.name"/>
+                                <span>, HR</span>
+                            </div>
+                        </div>
+
+                        <div class="barcode">
+                            <img src="/bp_employee_certificate/static/description/logo-bloopark.png"
+                                 style="max-height:32px;max-width:90%; z-index: 1; padding-left: 14px;"
+                                 alt="Company Logo"/>
+                            <div style="display: flex; align-items: center;">
+                                <span class="note text-center">
+                                    Please Scan the QR code
+                                    <br/>
+                                    to verify the certificate.
+                                </span>
+                                <img t-if="o.qr_code"
+                                     t-att-src="image_data_uri(o.qr_code)"
+                                     style="max-height: 66px;max-width:90%;z-index: 1;"
+                                     alt="Company Logo"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

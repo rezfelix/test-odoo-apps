@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="employee_certificate_view_form" model="ir.ui.view">
+        <field name="name">employee.certificate.form</field>
+        <field name="model">employee.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Employee Certificate">
+                <header>
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,confirm"/>
+
+                    <button string="Confirm/Publish"
+                            states="draft"
+                            class="oe_highlight"
+                            name="action_confirm"
+                            type="object"/>
+                    <button string="Set Draft"
+                            states="cancel,confirm"
+                            class="oe_highlight"
+                            name="action_draft"
+                            type="object"/>
+                    <button string="Send Employee Certificate"
+                            states="confirm"
+                            class="oe_highlight"
+                            name="action_send_mail_certificate"
+                            type="object"/>
+                    <button string="Cancel"
+                            states="draft,confirm"
+                            name="action_cancel"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="qr_code" widget='image' class="oe_avatar"/>
+                    <label for="name" string="Title"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"
+                                   attrs="{'readonly': [('state','!=', 'draft')]}"
+                                   placeholder="e.g Certificate in scrum"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="employee_id"
+                                   widget="many2one_avatar_employee"
+                                   attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="company_id" options="{'no_create':True}" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="date" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="certificate_years" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="certificate_type_id" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="view_id"
+                                   context="{'default_type':'qweb'}" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="certificate_url" widget="CopyClipboardChar" attrs="{'invisible': [('state','!=', 'confirm')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ceo_signature"
+                                   widget="signature"
+                                   options="{'full_name': 'ceo_employee_id'}"/>
+                            <field name="ceo_employee_id" widget="many2one_avatar_employee"/>
+                        </group>
+                        <group>
+                            <field name="hr_signature"
+                                   widget="signature"
+                                   options="{'full_name': 'hr_employee_id'}"/>
+                            <field name="hr_employee_id" widget="many2one_avatar_employee"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+    <record id="employee_certificate_view_tree" model="ir.ui.view">
+        <field name="name">employee.certificate.tree</field>
+        <field name="model">employee.certificate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"
+                       widget="many2one_avatar_employee"/>
+                <field name="company_id" optional="hide"/>
+                <field name="date" optional="show"/>
+                <field name="token" optional="hide"/>
+                <field name="certificate_url"
+                       optional="show"
+                       widget="url"
+                       attrs="{'invisible': [('state','!=', 'confirm')]}"/>
+                <field name="state"
+                       widget="badge"
+                       decoration-muted="state == 'cancel'"
+                       decoration-info="state  == 'draft'"
+                       decoration-success="state == 'confirm'"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="employee_certificate_view_search" model="ir.ui.view">
+        <field name="name">employee.certificate.search.view</field>
+        <field name="model">employee.certificate</field>
+        <field name="arch" type="xml">
+            <search string="Employee Certificate">
+                <field name="name"
+                       string="Description/Employee"
+                       filter_domain="('|', ('name', 'ilike', self), ('employee_id', 'ilike', self))"/>
+                <field name="token"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_by_employee" string="Employee" domain="[]" context="{'group_by':'employee_id'}"/>
+                    <filter name="group_by_company" string="Company" domain="[]" context="{'group_by':'company_id'}"/>
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+                <filter string="Archived" name="active" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="employee_certificate_action" model="ir.actions.act_window">
+        <field name="name">Employee Certificate</field>
+        <field name="res_model">employee.certificate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Employee Certificate
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit this view to disable many2one_avatar_employee widget to avoid errors in case login user is portal user -->
+        <record id="timesheet_view_tree_user" model="ir.ui.view">
+            <field name="name">account.analytic.line.view.tree.with.user</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.timesheet_view_tree_user"/>
+            <field name="mode">primary</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_portal')])]"/>
+            <field name="priority">9</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                    <attribute name="required">1</attribute>
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="widget"></attribute>
+                    <attribute name="context">{'active_test': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_employee_form" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="domain">[]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_form2_inherited" model="ir.ui.view">
+            <field name="name">project.task.form.inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.project_sharing_inherit_project_task_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='timesheet_ids']" position="after">
+                    <field name="view_only_timesheet" invisible="1"/>
+                    <button string="Add/View your time sheet"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('view_only_timesheet', '=', False)]}"
+                            type="object"
+                            name="action_portal_timesheet"/>
+                </xpath>
+
+                <xpath expr="//field[@name='timesheet_ids']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('view_only_timesheet', '=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='timesheet_ids']" position="before">
+                    <field name="view_only_timesheet_ids"
+                           attrs="{'invisible': [('view_only_timesheet', '=', False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

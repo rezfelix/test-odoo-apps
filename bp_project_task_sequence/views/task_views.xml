@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="quick_create_task_form" model="ir.ui.view">
+        <field name="name">project.project.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="task_name" required="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">project.project.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="task_name"
+                       required="1"
+                       class="o_task_name text-truncate"
+                       placeholder="Task Title..."
+                       default_focus="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/tree/field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/tree/field[@name='name']" position="before">
+                <field name="task_name" required="1"/>
+                <field name="task_sequence"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <field name="task_sequence"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="project_sharing_project_task_view_form" model="ir.ui.view">
+        <field name="name">project.project.share.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.project_sharing_project_task_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="task_name"
+                       readonly="False"
+                       required="1"
+                       class="o_task_name text-truncate"
+                       placeholder="Task Title..."
+                       default_focus="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/tree/field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/tree/field[@name='name']" position="before">
+                <field name="task_name" required="1"/>
+                <field name="task_sequence"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <field name="task_sequence"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_project_task_kanban" model="ir.ui.view">
+        <field name="name">view.project.task.kanban</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <field name="color" position="after">
+                <field name="task_sequence"/>
+                <field name="task_name"/>
+            </field>
+
+            <strong class="o_kanban_record_title" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </strong>
+
+            <strong class="o_kanban_record_title" position="before">
+                <t t-if="record.task_sequence.raw_value">
+                    <div class="text-primary">
+                        <field name="task_sequence"/>
+                    </div>
+                </t>
+            </strong>
+
+            <strong class="o_kanban_record_title" position="after">
+                <strong class="o_kanban_record_title">
+                    <s t-if="!record.active.raw_value">
+                        <field name="task_name" widget="name_with_subtask_count"/>
+                    </s>
+                    <t t-else="">
+                        <field name="task_name" widget="name_with_subtask_count"/>
+                    </t>
+                </strong>
+            </strong>
+
+        </field>
+    </record>
+
+    <!--    Portal    -->
+    <record id="project_sharing_project_task_view_kanban" model="ir.ui.view">
+        <field name="name">view.project.task.sharing.kanban</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.project_sharing_project_task_view_kanban"/>
+        <field name="arch" type="xml">
+            <field name="color" position="after">
+                <field name="task_sequence"/>
+                <field name="task_name"/>
+            </field>
+
+            <strong class="o_kanban_record_title" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </strong>
+
+            <strong class="o_kanban_record_title" position="before">
+                <t t-if="record.task_sequence.raw_value">
+                    <div class="text-primary">
+                        <field name="task_sequence"/>
+                    </div>
+                </t>
+            </strong>
+
+            <strong class="o_kanban_record_title" position="after">
+                <strong class="o_kanban_record_title">
+                    <s t-if="!record.active.raw_value">
+                        <field name="task_name" widget="name_with_subtask_count"/>
+                    </s>
+                    <t t-else="">
+                        <field name="task_name" widget="name_with_subtask_count"/>
+                    </t>
+                </strong>
+            </strong>
+
+        </field>
+    </record>
+
+</odoo>

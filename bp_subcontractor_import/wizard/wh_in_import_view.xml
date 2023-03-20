@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="import_sn_sheets_wizard_view" model="ir.ui.view">
+        <field name="name">wh.in.import.view</field>
+        <field name="model">wh.in.import</field>
+        <field name="arch" type="xml">
+            <form string="File Import">
+                <group>
+                    <group>
+                        <field name="search_product_by_field"/>
+                        <field name="file_type" widget="radio" string="File Type"/>
+                        <field name="separator"
+                               attrs="{'invisible': [('file_type', 'not in', ['csv'] )],'required': [('file_type', 'in', ['csv'] )]}" />
+                    </group>
+                    <group>
+                        <field name="file" filename="name"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="action_confirm_wizard"
+                            confirm="Are you sure to import and assign finished product lots?"
+                            string="Import"
+                            type="object"
+                            class="btn-primary"/>
+                    <button special="cancel" string="Close" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="import_serial_numbers_from_files" model="ir.actions.act_window">
+        <field name="name">Import Sheets</field>
+        <field name="res_model">wh.in.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="import_sn_sheets_wizard_view"/>
+    </record>
+
+</odoo>

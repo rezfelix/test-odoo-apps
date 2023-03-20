@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_subcontractor_import_picking_form_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.lot.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids_without_package']//tree//button[@name='action_show_details']" position="after">
+                <button name="%(bp_subcontractor_import.import_serial_numbers_from_files)d"
+                        type="action"
+                        icon="fa-level-down"
+                        attrs="{'invisible': ['|', ('show_details_visible', '=', False), ('has_tracking', '=','none')]}"
+                        options="{&quot;warn&quot;: true}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
