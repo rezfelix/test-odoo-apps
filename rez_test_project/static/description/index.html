@@ -158,19 +158,6 @@
 
 
 
-
-
-                  <div class="d-flex justify-content-center">
-                    <div class="bg-primary rounded-pill d-flex align-items-center p-2">
-                      <img src="icons/globe-yellow-for button.svg" alt="Icon" class="mr-2" style="width: 24px; height: 24px;">
-                      <span class="text-white font-weight-bold" style="font-size: 18px;">www.bloopark.de</span>
-                      <button class="btn btn-light ml-auto" data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard" onclick="copyToClipboard('www.bloopark.de')">
-                        <img src="copy-icon.png" alt="Copy" style="width: 24px; height: 24px;">
-                      </button>
-                    </div>
-                  </div>
-
-
                   <!--   Paragraph   -->
                   <div style='
                       font-family: "Roboto", sans-serif;
@@ -1041,18 +1028,5 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
           integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
           crossorigin="anonymous"></script>
-
-
-          <script>
-            function copyToClipboard(text) {
-              const input = document.createElement('input');
-              input.setAttribute('value', text);
-              document.body.appendChild(input);
-              input.select();
-              document.execCommand('copy');
-              document.body.removeChild(input);
-              $('[data-toggle="tooltip"]').tooltip('show');
-            }
-          </script>
    </body>
 </html>
